@@ -65,6 +65,11 @@ async def all(message: Message, state: FSMContext):
             if domain == "vk.com":
                 if link.find("@") > -1:
                     return
+            elif domain == "vkvideo.ru":
+                if link.find("@") > -1:
+                    return
+                link = link.replace("vkvideo.ru", "vk.com")
+                domain = "vk.com"
             _, work = db.get_user(message.from_user.id)
             if work == 1:
                 await message.answer("Wait while your video is downloading")
