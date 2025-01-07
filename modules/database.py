@@ -3,7 +3,7 @@ import traceback
 
 class DataBase:
     def __init__(self):
-        self.database_name = "db.db"
+        self.database_name = "base/db.db"
         self.create_base()
 
     # создание бд
