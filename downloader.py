@@ -55,13 +55,9 @@ def download_audio(video_url, output_path, user_id, thumb, bot_username):
             'outtmpl': output_path[:-4],
             'writethumbnail': True,
         }
-        try:
-            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-                ydl.download([video_url])
-        except:
-            ydl_opts['cookiefile'] = 'cookies/youtube.txt'
-            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-                ydl.download([video_url])
+        ydl_opts['cookiefile'] = 'cookies/youtube.txt'
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            ydl.download([video_url])
         audio_thumb = f"{thumb[:-4]}_audio.jpg"
         try:
             crop_to_square(thumb, audio_thumb)
@@ -127,6 +123,7 @@ def simple_downloader(url, output_path, user_id, domain, video_format=None, titl
             ydl_opts['format'] = video_format+"+bestaudio"
             ydl_opts['merge_output_format'] = "mp4"
 
+        ydl_opts['cookiefile'] = 'cookies/youtube.txt'
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             ydl.download([url])
             info_dict = ydl.extract_info(url, download=False)
